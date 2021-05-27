@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Bare - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet"/>
 </head>
 <body>
-
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/student/register}">Register New Student</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/student/register}">Register To a Course</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{#}">Show All Students</a></li>
+                        <li><a class="dropdown-item" th:href="@{#}">Show All Courses</a></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item" th:href="@{#}">Get Student By Email</a></li>
+                        <li><a class="dropdown-item" th:href="@{#}">Get Student Courses</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 p-5">
+            <form th:action="@{./add_student}" method="post" th:object="${student}" novalidate>
+                <legend class="fw-bold p3">Student Registration</legend>
+                <div class="mb-3">
+                    <label for="username" class="form-label fw-bold fst-italic">Name: </label>
+                    <input type="text" id="username" th:field="*{studentName}"
+                           th:class="${#fields.hasErrors('studentName')}?'is-invalid form-control':'form-control'"
+                           required>
+                    <div class="invalid-feedback">
+                        <p class="error" th:each="error : ${#fields.errors('studentName')}"
+                           th:text="${error}"></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold fst-italic">Email : </label>
+                    <input type="text" id="email" th:field="*{studentEmail}" required
+                           th:class="${#fields.hasErrors('studentEmail')}?'is-invalid form-control':'form-control' ">
+                    <div class="invalid-feedback">
+                        <p class="error" th:each="error : ${#fields.errors('studentEmail')}" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold fst-italic">Password : </label>
+                    <input type="password" id="password" th:field="*{studentPwd}" required
+                           th:class="${#fields.hasErrors('studentPwd')}?'is-invalid form-control':'form-control' ">
+                    <div class="invalid-feedback">
+                        <p class="error" th:each="error : ${#fields.errors('studentPwd')}"
+                           th:text="${error}"></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" value="Submit" class="btn btn-secondary"/>
+                </div>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../js/scripts.js"></script>
 </body>
 </html>

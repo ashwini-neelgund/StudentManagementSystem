@@ -13,9 +13,9 @@ public class HomeController {
             - provide as much as possible e.g. get/post/put/delete mappings
      */
 
-    @GetMapping("/template")
+    @GetMapping("/index")
     public String template(){
-        return "template";
+        return "index";
     }
 
 }

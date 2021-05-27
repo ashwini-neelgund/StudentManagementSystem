@@ -36,8 +36,12 @@ public class StudentService {
         return studentRepo.findByStudentEmail(email);
     }
 
-    public boolean validateStudent(String studentName, String studentEmail) {
+    public boolean checkIfStudentExists(String studentName, String studentEmail) {
         return studentRepo.existsByStudentNameAndStudentEmail(studentName, studentEmail);
+    }
+
+    public boolean isValid(String email, String password) {
+        return studentRepo.existsByStudentEmailAndStudentPwd(email, password);
     }
 
     public boolean registerStudentToCourse(Long studentId, Long courseId) {
@@ -62,5 +66,7 @@ public class StudentService {
 
     }
 
-
+    public void addStudent(Student student) {
+        studentRepo.save(student);
+    }
 }
