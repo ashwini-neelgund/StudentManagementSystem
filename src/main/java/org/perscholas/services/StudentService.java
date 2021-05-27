@@ -14,11 +14,6 @@ import java.util.List;
 @Transactional
 public class StudentService {
 
-    /*
-            - add class annotations
-            - add @Transactional on class or on each method
-            - add crud methods
-     */
     private IStudentRepo studentRepo;
     private ICourseRepo courseRepo;
 

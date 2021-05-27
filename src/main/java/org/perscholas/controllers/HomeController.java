@@ -8,13 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class HomeController {
 
-    /*
-            - controllers should be separated e.g. @RequestMapping("admin"), @RequestMapping("student")
-            - provide as much as possible e.g. get/post/put/delete mappings
-     */
-
     @GetMapping("/index")
-    public String template(){
+    public String template() {
         return "index";
     }
 

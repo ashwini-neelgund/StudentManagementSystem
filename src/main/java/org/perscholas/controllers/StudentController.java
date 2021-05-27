@@ -1,6 +1,5 @@
 package org.perscholas.controllers;
 
-
 import org.perscholas.models.Student;
 import org.perscholas.services.StudentService;
 import org.springframework.stereotype.Controller;
@@ -32,7 +31,6 @@ public class StudentController {
         return "homepage";
     }
 
-
     @PostMapping("/add_student")
     public String addStudent(@ModelAttribute("student") @Valid Student student, BindingResult result, Model model) {
 
@@ -60,6 +58,5 @@ public class StudentController {
             return "index";
         }
     }
-
 
 }
