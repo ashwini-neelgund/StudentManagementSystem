@@ -22,7 +22,7 @@ public class StudentController {
     @GetMapping("/register")
     public String showRegisterStudentForm(Model model) {
         model.addAttribute("student", new Student());
-        return "studentRegistration";
+        return "new-student";
     }
 
     @GetMapping("/homepage")
@@ -31,23 +31,7 @@ public class StudentController {
         return "homepage";
     }
 
-    @PostMapping("/add_student")
-    public String addStudent(@ModelAttribute("student") @Valid Student student, BindingResult result, Model model) {
 
-        if (result.hasErrors()) {
-            return "studentRegistration";
-        }
-
-        if (studentService.checkIfStudentExists(student.getStudentName(), student.getStudentEmail())) {
-            model.addAttribute("error", "That student is already registered. Please login.");
-            return "home";
-        }
-
-        studentService.addStudent(student);
-        model.addAttribute("success", "Student successfully registered.");
-        return "homepage";
-
-    }
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
