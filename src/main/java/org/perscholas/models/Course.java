@@ -28,26 +28,16 @@ public class Course implements Serializable {
     static final long serialVersionUID = 6381462249347345007L;
 
     @NotBlank(message = "Please enter a course name")
-    @NotNull(message = "Please enter a course name")
     @Length(max = 25, message = "Max name length is 25 characters")
     String courseName;
 
     @NotBlank(message = "Please enter a name")
-    @NotNull(message = "Please enter a name")
     @Length(max = 25, message = "Max name length is 25 characters")
     String courseInstructor;
 
     @ManyToMany(mappedBy = "studentCourses", targetEntity = Student.class)
     List<Student> enrolledStudents;
-    /*
-          note use annotation  '@ToString.Exclude' for Lists
-          ----------------
-          - add validation for fields
-          - relationships
-          - utilities methods if any
-   */
 
-    //fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long courseId;
