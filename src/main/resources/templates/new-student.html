@@ -48,7 +48,7 @@
         <div class="col-4"></div>
         <div class="col-4 p-5">
             <form th:action="@{./add_student}" method="post" th:object="${student}" novalidate>
-                <legend class="fw-bold p3">Student Registration</legend>
+                <h3 class="fw-bold p3">New Student Registration</h3>
                 <div class="mb-3">
                     <label for="username" class="form-label fw-bold fst-italic">Name: </label>
                     <input type="text" id="username" th:field="*{studentName}"
