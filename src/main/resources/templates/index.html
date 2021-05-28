@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Bare - Start Bootstrap Template</title>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <title>Student Management System</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico"/>
+    <link href="../assets/favicon.ico" rel="icon" type="image/x-icon"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet"/>
 </head>
@@ -17,18 +16,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">Student Management System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a aria-current="page" class="nav-link active" th:href="@{/}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/student/register}">Register New Student</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/student/register}">Register To a Course</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="navbarDropdown" role="button">Admin</a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" th:href="@{#}">Show All Students</a></li>
                         <li><a class="dropdown-item" th:href="@{#}">Show All Courses</a></li>
                         <li>
@@ -47,16 +46,16 @@
     <h1>Student Management System</h1>
     <span th:text="${success}"></span>
     <span th:text="${error}"></span>
-    <form method="post" action="/student/login">
+    <form action="/student/login" method="post">
         <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <label class="form-label" for="email">Email address</label>
+            <input class="form-control" id="email" name="email" type="email">
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" id="password" name="password" type="password">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button class="btn btn-primary" type="submit">Login</button>
     </form>
 </div>
 <!-- Bootstrap core JS-->
