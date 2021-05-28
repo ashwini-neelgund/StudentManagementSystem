@@ -40,7 +40,7 @@ public class StudentController {
 
         if (studentService.checkIfStudentExists(student.getStudentName(), student.getStudentEmail())) {
             model.addAttribute("error", "That student is already registered. Please login.");
-            return "index";
+            return "home";
         }
 
         studentService.addStudent(student);
@@ -55,7 +55,7 @@ public class StudentController {
             return "homepage";
         } else {
             model.addAttribute("error", "Invalid email/password");
-            return "index";
+            return "home";
         }
     }
 
