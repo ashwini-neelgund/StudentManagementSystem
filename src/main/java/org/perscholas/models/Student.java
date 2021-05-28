@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -22,12 +20,12 @@ public class Student implements Serializable {
 
     static final long serialVersionUID = 6381462249347345007L;
 
+    @ManyToMany(targetEntity = Course.class)
+    List<Course> studentCourses;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
-
-    @ManyToMany(targetEntity = Course.class)
-    List<Course> studentCourses;
 
     @NotBlank(message = "Please enter a name")
     @Length(max = 25, message = "Max name length is 25 characters")
@@ -43,5 +41,15 @@ public class Student implements Serializable {
     @NotBlank(message = "Please enter an email")
     @Email
     private String studentEmail;
+
+    /**
+     * Adds a course to a student's course list.
+     * @param course the course to add
+     */
+    public void addCourse(Course course) {
+
+        this.studentCourses.add(course);
+
+    }
 
 }
