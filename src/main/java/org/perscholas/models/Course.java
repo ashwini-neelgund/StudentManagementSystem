@@ -1,8 +1,6 @@
 package org.perscholas.models;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Component
 public class Course implements Serializable {
@@ -23,18 +20,24 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long courseId;
+    private Long courseId;
 
     @NotBlank(message = "Please enter a course name")
-    @Length(max = 25, message = "Max name length is 25 characters")
-    String courseName;
+    private String courseName;
 
     @NotBlank(message = "Please enter a name")
     @Length(max = 25, message = "Max name length is 25 characters")
-    String courseInstructor;
+    private String courseInstructor;
 
     @ManyToMany(mappedBy = "studentCourses", targetEntity = Student.class)
-    List<Student> enrolledStudents;
+    private List<Student> enrolledStudents;
+
+    public Course(String name, String instructor) {
+
+        this.courseName = name;
+        this.courseInstructor = instructor;
+
+    }
 
     /**
      * Adds a student to a course's student roster.

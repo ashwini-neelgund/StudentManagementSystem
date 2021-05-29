@@ -1,5 +1,6 @@
 package org.perscholas.controllers;
 
+import org.hibernate.Session;
 import org.perscholas.models.Student;
 import org.perscholas.services.StudentService;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class RegisterNewStudentController {
     }
 
     @PostMapping("/add-student")
-    public String addStudent(@ModelAttribute("student") @Valid Student student, BindingResult result, Model model) {
+    public String addStudent(@Valid @ModelAttribute("student") Student student, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             return "new-student";

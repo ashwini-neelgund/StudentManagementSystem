@@ -2,6 +2,7 @@ package org.perscholas.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,14 @@ import java.util.List;
 public class Student implements Serializable {
 
     static final long serialVersionUID = 6381462249347345007L;
+
+    public Student(String name, String email, String password) {
+
+        studentName = name;
+        studentEmail = email;
+        studentPwd = password;
+
+    }
 
     @ManyToMany(targetEntity = Course.class)
     List<Course> studentCourses;
