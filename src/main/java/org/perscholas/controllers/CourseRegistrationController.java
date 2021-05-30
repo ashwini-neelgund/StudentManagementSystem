@@ -35,6 +35,8 @@ public class CourseRegistrationController {
                 courses.get(1)
         );
 
+
+        model.addAttribute("currentCourses", currentCourses);
         model.addAttribute("courses", filterEnrolledCourses(courses, currentCourses));
 
     }
