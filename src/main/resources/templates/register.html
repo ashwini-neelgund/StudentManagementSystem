@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-    <title>Student Management System</title>
-    <!-- Favicon-->
-    <link href="../assets/favicon.ico" rel="icon" type="image/x-icon"/>
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/styles.css" rel="stylesheet"/>
-</head>
+<head th:insert="head :: head"></head>
 
 <body>
 <!-- Responsive navbar-->
@@ -20,18 +10,18 @@
     <h3>Course Registration</h3>
     <h4>Current Courses for </h4>
     <div class="list-group" th:each="curCourse : ${currentCourses}">
-        <button type="button" class="list-group-item list-group-item-action" th:value="${curCourse.courseId}"
-                th:text="${curCourse.courseName}">
+        <button class="list-group-item list-group-item-action" th:text="${curCourse.courseName}" th:value="${curCourse.courseId}"
+                type="button">
             Course Name
         </button>
     </div>
     <h4>Available Courses</h4>
     <form method="post" th:object="${courses}">
         <div class="list-group" th:each="course : ${courses}">
-                <button type="button" class="list-group-item list-group-item-action" th:value="${course.courseId}"
-                        th:text="${course.courseName + '&emsp;--> with ' + course.courseInstructor}">
-                    Course Name
-                </button>
+            <button class="list-group-item list-group-item-action" th:text="${course.courseName + '&emsp;--> with ' + course.courseInstructor}" th:value="${course.courseId}"
+                    type="button">
+                Course Name
+            </button>
         </div>
     </form>
 </div>
