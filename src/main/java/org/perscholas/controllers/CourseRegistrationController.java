@@ -47,7 +47,6 @@ public class CourseRegistrationController {
     @GetMapping
     public String showRegistrationForm() {
 
-
         return "register";
 
     }
