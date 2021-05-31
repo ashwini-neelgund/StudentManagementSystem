@@ -35,8 +35,10 @@ public class CourseRegistrationController {
     public void addCoursesToModel(Model model) {
 
         List<Course> courses = courseService.getAllCourses();
-        Student student = studentService.getStudentByEmail("jjones@hotmail.com");
+//        Student student = studentService.getStudentByEmail("jjones@hotmail.com");
+        Student student = (Student) model.getAttribute("student");
         List<Course> currentCourses = student.getStudentCourses();
+        log.info("" + model.containsAttribute("student"));
 
         model.addAttribute("student", student);
         model.addAttribute("currentCourses", currentCourses);
@@ -69,6 +71,12 @@ public class CourseRegistrationController {
      * @return filtered list of courses
      */
     private Iterable<Course> filterEnrolledCourses(List<Course> allCourses, List<Course> studentCourses) {
+
+        if (studentCourses == null || studentCourses.size() == 0) {
+
+            return allCourses;
+
+        }
 
         return allCourses.stream().filter(course -> !studentCourses.contains(course)).collect(Collectors.toList());
 

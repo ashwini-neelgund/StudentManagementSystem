@@ -2,6 +2,8 @@ package org.perscholas.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,6 +22,7 @@ import java.util.List;
 public class Student implements Serializable {
 
     static final long serialVersionUID = 6381462249347345007L;
+    @Fetch(FetchMode.JOIN)
     @ManyToMany(targetEntity = Course.class)
     List<Course> studentCourses;
     @Id
@@ -42,6 +46,7 @@ public class Student implements Serializable {
         studentName = name;
         studentEmail = email;
         studentPwd = password;
+        studentCourses = new ArrayList<>();
 
     }
 
@@ -58,11 +63,14 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
+
         return "Student{" +
                 "studentId=" + studentId +
                 ", studentName='" + studentName + '\'' +
                 ", studentPwd='" + studentPwd + '\'' +
                 ", studentEmail='" + studentEmail + '\'' +
                 '}';
+
     }
+
 }

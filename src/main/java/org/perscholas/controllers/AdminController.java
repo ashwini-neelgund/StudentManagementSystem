@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -42,6 +44,22 @@ public class AdminController {
         Iterable<Student> students = studentService.getAllStudents();
         model.addAttribute("students", students);
         return "all-students";
+
+    }
+
+    @GetMapping("student-info")
+    public String getStudent(Model model) {
+
+        return "student-info";
+
+    }
+
+    @PostMapping("student-info")
+    public String displayInfo(@ModelAttribute("email") String email, Model model) {
+
+        Student student =  studentService.getStudentByEmail(email);
+        model.addAttribute("student", student);
+        return "student-info";
 
     }
 }
