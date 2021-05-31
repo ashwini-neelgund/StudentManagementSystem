@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,8 +35,9 @@ public class CourseRegistrationController {
     public void addCoursesToModel(Model model) {
 
         List<Course> courses = courseService.getAllCourses();
-        Student student = studentService.getStudentByEmail("steve@gmail.com");
-        List<Course> currentCourses =student.getStudentCourses();
+        Student student = studentService.getStudentByEmail("jjones@hotmail.com");
+//        Student student = (Student) model.getAttribute("student");
+        List<Course> currentCourses = student.getStudentCourses();
 
         model.addAttribute("student", student);
         model.addAttribute("currentCourses", currentCourses);
@@ -58,15 +58,16 @@ public class CourseRegistrationController {
         studentService.saveStudent(student);
         model.addAttribute("currentCourses", student.getStudentCourses());
         model.addAttribute("courses", filterEnrolledCourses(courseService.getAllCourses(), student.getStudentCourses()));
-        return "register";
+        return "finalize";
 
     }
 
     /**
      * This filters out courses from a course list that an arbitrary student already has in their course list
-     * @param allCourses list of all available courses
+     *
+     * @param allCourses     list of all available courses
      * @param studentCourses list of courses that a student has enrolled in already
-     * @return
+     * @return filtered list of courses
      */
     private Iterable<Course> filterEnrolledCourses(List<Course> allCourses, List<Course> studentCourses) {
 

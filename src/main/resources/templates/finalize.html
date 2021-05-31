@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+
+<body>
+<div th:insert="navbar :: navbar"></div>
+<div class="container">
+    <h3>Finalize Registration</h3>
+    <h4>Selected Courses for <span th:text="${student.studentName}"></span></h4>
+    <ul class="list-group" th:each="curCourse : ${currentCourses}">
+        <li class="list-group-item list-group-item-action" th:text="${curCourse.courseName}"
+            th:value="${curCourse.courseId}">
+            Course Name
+        </li>
+    </ul>
+</div>
+</body>
+</html>

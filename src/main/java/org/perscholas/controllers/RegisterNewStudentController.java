@@ -1,6 +1,5 @@
 package org.perscholas.controllers;
 
-import org.hibernate.Session;
 import org.perscholas.models.Student;
 import org.perscholas.services.StudentService;
 import org.springframework.stereotype.Controller;
@@ -40,12 +39,13 @@ public class RegisterNewStudentController {
 
         if (studentService.checkIfStudentExists(student.getStudentName(), student.getStudentEmail())) {
             model.addAttribute("error", "You are already in the system. Please login.");
-            return "home";
+            return "redirect:/home";
         }
 
         studentService.addStudent(student);
         model.addAttribute("success", "Account created.");
-        return "homepage";
+        model.addAttribute("student", student);
+        return "redirect:/register";
 
     }
 
