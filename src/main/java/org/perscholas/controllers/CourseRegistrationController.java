@@ -1,7 +1,11 @@
 package org.perscholas.controllers;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.perscholas.models.Course;
+import org.perscholas.models.Student;
 import org.perscholas.services.CourseService;
+import org.perscholas.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +15,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 @RequestMapping("/register")
 @SessionAttributes("student")
 public class CourseRegistrationController {
 
     private final CourseService courseService;
+    private final StudentService studentService;
 
     @Autowired
-    public CourseRegistrationController(CourseService courseService) {
+    public CourseRegistrationController(CourseService courseService, StudentService studentService) {
 
         this.courseService = courseService;
+        this.studentService = studentService;
 
     }
 
@@ -29,13 +36,10 @@ public class CourseRegistrationController {
     public void addCoursesToModel(Model model) {
 
         List<Course> courses = courseService.getAllCourses();
+        Student student = studentService.getStudentByEmail("steve@gmail.com");
+        List<Course> currentCourses =student.getStudentCourses();
 
-        // Temp. hardcoding
-        List<Course> currentCourses = Arrays.asList(
-                courses.get(1)
-        );
-
-
+        model.addAttribute("student", student);
         model.addAttribute("currentCourses", currentCourses);
         model.addAttribute("courses", filterEnrolledCourses(courses, currentCourses));
 
@@ -49,10 +53,12 @@ public class CourseRegistrationController {
     }
 
     @PostMapping
-    public String processStudentRegistration(List<Course> courses) {
+    public String processStudentRegistration(Student student, Model model) {
 
-        // TODO: 5/28/2021
-        return "redirect:/courses/current";
+        studentService.saveStudent(student);
+        model.addAttribute("currentCourses", student.getStudentCourses());
+        model.addAttribute("courses", filterEnrolledCourses(courseService.getAllCourses(), student.getStudentCourses()));
+        return "register";
 
     }
 

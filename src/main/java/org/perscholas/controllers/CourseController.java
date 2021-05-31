@@ -1,6 +1,6 @@
 package org.perscholas.controllers;
 
-import org.perscholas.models.Course;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,6 @@ public class CourseController {
     public String currentCourses(Model model) {
 
         // temp. hardcode
-        model.addAttribute("courses", new Course("Dance", "Disco Stu"));
         return "courses";
 
     }

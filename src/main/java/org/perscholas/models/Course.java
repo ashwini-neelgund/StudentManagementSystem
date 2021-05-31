@@ -1,7 +1,7 @@
 package org.perscholas.models;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +41,7 @@ public class Course implements Serializable {
 
     /**
      * Adds a student to a course's student roster.
+     *
      * @param student student to add to the course
      */
     public void addStudent(Student student) {

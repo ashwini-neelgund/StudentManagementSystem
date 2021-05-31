@@ -64,4 +64,11 @@ public class StudentService {
     public void addStudent(Student student) {
         studentRepo.save(student);
     }
+
+    public Student saveStudent(Student student) {
+
+        return studentRepo.save(student);
+
+    }
+
 }

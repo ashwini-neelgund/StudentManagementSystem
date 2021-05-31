@@ -8,21 +8,21 @@
 <!-- Page content-->
 <div class="container">
     <h3>Course Registration</h3>
-    <h4>Current Courses for </h4>
-    <div class="list-group" th:each="curCourse : ${currentCourses}">
-        <button class="list-group-item list-group-item-action" th:text="${curCourse.courseName}" th:value="${curCourse.courseId}"
-                type="button">
+    <h4>Current Courses for <span th:text="${student.studentName}"></span> </h4>
+    <ul class="list-group" th:each="curCourse : ${currentCourses}">
+        <li class="list-group-item list-group-item-action" th:text="${curCourse.courseName}"
+            th:value="${curCourse.courseId}">
             Course Name
-        </button>
-    </div>
+        </li>
+    </ul>
     <h4>Available Courses</h4>
-    <form method="post" th:object="${courses}">
-        <div class="list-group" th:each="course : ${courses}">
-            <button class="list-group-item list-group-item-action" th:text="${course.courseName + '&emsp;--> with ' + course.courseInstructor}" th:value="${course.courseId}"
-                    type="button">
-                Course Name
-            </button>
+    <form method="post" th:object="${student}" id="courseForm">
+        <div class="form-check" th:each="course : ${courses}">
+            <input class="form-check-input" th:field="*{studentCourses}" type="checkbox"
+                   th:value="${course.courseId}" /></input>
+            <label class="form-check-label" th:text="${course.courseName}">COURSE</label><br/>
         </div>
+        <button>Register Courses</button>
     </form>
 </div>
 
