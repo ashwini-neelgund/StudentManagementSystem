@@ -30,7 +30,7 @@ public class RegisterNewStudentController {
 
     }
 
-    @PostMapping("/add-student")
+    @PostMapping
     public String addStudent(@Valid @ModelAttribute("student") Student student, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
