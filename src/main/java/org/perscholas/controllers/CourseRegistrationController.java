@@ -36,7 +36,6 @@ public class CourseRegistrationController {
 
         List<Course> courses = courseService.getAllCourses();
         Student student = studentService.getStudentByEmail("jjones@hotmail.com");
-//        Student student = (Student) model.getAttribute("student");
         List<Course> currentCourses = student.getStudentCourses();
 
         model.addAttribute("student", student);
@@ -47,6 +46,7 @@ public class CourseRegistrationController {
 
     @GetMapping
     public String showRegistrationForm() {
+
 
         return "register";
 

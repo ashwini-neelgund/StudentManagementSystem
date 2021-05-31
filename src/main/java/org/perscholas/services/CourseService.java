@@ -30,4 +30,10 @@ public class CourseService {
         return courseRepo.findAll();
 
     }
+
+    public Course getCourseById(Long id) {
+
+        return courseRepo.getById(id);
+
+    }
 }

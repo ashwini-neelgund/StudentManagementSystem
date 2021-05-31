@@ -16,11 +16,11 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/new-student}">Register New Student</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register To a Course</a></li>
                 <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                        id="navbarDropdown" role="button">Admin</a>
                     <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" th:href="@{#}">Show All Students</a></li>
-                        <li><a class="dropdown-item" th:href="@{#}">Show All Courses</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/all-students}">Show All Students</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/all-courses}">Show All Courses</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>

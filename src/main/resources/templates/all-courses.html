@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+<body>
+<div th:insert="navbar :: navbar"></div>
+<div class="container">
+  <h2>Current Courses Offered</h2><br/>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course</th>
+      <th scope="col">Instructor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${courses}">
+      <th scope="row" th:text="${course.courseId}">ID</th>
+      <td th:text="${course.courseName}">NAME</td>
+      <td th:text="${course.courseInstructor}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

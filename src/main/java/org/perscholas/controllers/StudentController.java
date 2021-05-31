@@ -31,16 +31,4 @@ public class StudentController {
         return "homepage";
     }
 
-
-
-    @PostMapping("/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-        if (studentService.isValid(email, password)) {
-            return "homepage";
-        } else {
-            model.addAttribute("error", "Invalid email/password");
-            return "home";
-        }
-    }
-
 }
