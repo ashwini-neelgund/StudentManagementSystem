@@ -28,7 +28,7 @@ public class StudentController {
     @GetMapping("/homepage")
     public String showHomepage() {
 
-        return "homepage";
+        return "home";
     }
 
 }
