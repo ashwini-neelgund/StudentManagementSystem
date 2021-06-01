@@ -14,8 +14,8 @@ import java.util.List;
 @Transactional
 public class StudentService {
 
-    private IStudentRepo studentRepo;
-    private ICourseRepo courseRepo;
+    private final IStudentRepo studentRepo;
+    private final ICourseRepo courseRepo;
 
     @Autowired
     public StudentService(IStudentRepo studentRepo, ICourseRepo courseRepo) {

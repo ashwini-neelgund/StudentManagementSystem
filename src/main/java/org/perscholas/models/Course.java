@@ -2,6 +2,8 @@ package org.perscholas.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +34,7 @@ public class Course implements Serializable {
     @Length(max = 25, message = "Max name length is 25 characters")
     private String courseInstructor;
 
+    @Fetch(FetchMode.JOIN)
     @ManyToMany(mappedBy = "studentCourses", targetEntity = Student.class)
     private List<Student> enrolledStudents;
 

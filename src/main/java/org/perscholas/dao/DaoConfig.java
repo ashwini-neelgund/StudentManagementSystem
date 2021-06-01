@@ -20,7 +20,7 @@ public class DaoConfig {
             courseRepo.save(new Course("Intro to CS", "Donnie Wahlberg"));
             courseRepo.save(new Course("Data Structures and Algorithms", "Mark Wahlberg"));
             courseRepo.save(new Course("Elementary Particle Physics", "Homer Simpson"));
-            courseRepo.save(new Course("Hamburgers Through the Ages", "James Jamerson"));
+            courseRepo.save(new Course("Hamburgers of 17th Century Denmark", "James Jamerson"));
             courseRepo.save(new Course("Pre-Pre-Calculus", "Duncan Davis"));
             courseRepo.save(new Course("Intro to Arson", "Frank Flames"));
             courseRepo.save(new Course("Flea Training", "Flopsy Bunny"));

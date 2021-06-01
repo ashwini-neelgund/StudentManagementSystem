@@ -46,9 +46,9 @@
     <h4>Available Courses</h4>
     <form method="post" th:object="${student}" id="courseForm">
         <div class="form-check" th:each="course : ${courses}">
-            <input class="form-check-input" th:field="*{studentCourses}" type="checkbox"
-                   th:value="${course.courseId}" /></input>
-            <label class="form-check-label" th:text="${course.courseName}">COURSE</label><br/>
+            <label for="course" class="form-check-label" th:text="${course.courseName}">COURSE</label>
+            <input class="form-check-input" th:field="*{studentCourses}" id="course" type="checkbox"
+            th:value="${course.courseId}" />
         </div>
         <button>Register Courses</button>
     </form>
