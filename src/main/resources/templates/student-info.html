@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="head :: head"></head>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <title>Student Management System</title>
+    <!-- Favicon-->
+    <link href="../assets/favicon.ico" rel="icon" type="image/x-icon">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" rel="stylesheet">
+</head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -33,15 +44,15 @@
 </nav>
 <div class="container">
     <h2>Student Information</h2><br/>
-    <form method="post">
-        <label for="studentEmail">Student Email</label>
-        <input aria-label=".form-control-lg example" class="form-control form-control-lg" id="studentEmail"
+    <form action="/admin/lookup/" method="post">
+        <label for="email">Student Email</label>
+        <input aria-label=".form-control-lg example" class="form-control form-control-lg" id="email" name="email"
                placeholder="Student Email" type="text">
-        <input type="submit" class="btn btn-primary" value="Find">
+        <input class="btn btn-primary" type="submit" value="Find">
     </form>
     <div th:if="${student}">
         <h3 th:text="${student.studentName}">STUDENT NAME</h3>
-        <h4 th:text="${student.studentId}">STUDENT ID</h4>
+        <h4 th:text="${'ID: ' + student.studentId}">STUDENT ID</h4>
         <table class="table">
             <thead>
             <tr>
@@ -60,5 +71,9 @@
         </table>
     </div>
 </div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../js/scripts.js"></script>
 </body>
 </html>

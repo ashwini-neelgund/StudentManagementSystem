@@ -54,7 +54,7 @@ public class AdminController {
 
     }
 
-    @PostMapping("student-info")
+    @PostMapping("/lookup")
     public String displayInfo(@ModelAttribute("email") String email, Model model) {
 
         Student student =  studentService.getStudentByEmail(email);
