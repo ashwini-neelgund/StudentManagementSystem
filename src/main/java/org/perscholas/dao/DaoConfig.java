@@ -6,6 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * This class pre-loads the database with some students and courses on application start-up.
+ */
 @Configuration
 public class DaoConfig {
 

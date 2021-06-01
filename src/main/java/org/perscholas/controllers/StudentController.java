@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * Controller for student logic. I don't believe that it is currently in use. The useful logic has been moved to
+ * CourseRegistrationController.
+ */
 @Controller
 @RequestMapping("student")
 public class StudentController {

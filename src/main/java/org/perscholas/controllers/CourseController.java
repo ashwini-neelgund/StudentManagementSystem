@@ -1,11 +1,13 @@
 package org.perscholas.controllers;
 
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * This class provides mapping for courses. It is not currently used for anything.
+ */
 @Controller
 @RequestMapping("/courses")
 public class CourseController {

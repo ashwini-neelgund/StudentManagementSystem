@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class handles all of the course registration logic.
+ */
 @Slf4j
 @Controller
 @RequestMapping("/register")
@@ -31,6 +34,11 @@ public class CourseRegistrationController {
 
     }
 
+    /**
+     * This adds the student, a list of the students courses, and a filtered list of all of the courses that the
+     * students has not yet enrolled in.
+     * @param model
+     */
     @ModelAttribute
     public void addCoursesToModel(Model model) {
 
@@ -46,6 +54,10 @@ public class CourseRegistrationController {
 
     }
 
+    /**
+     * Shows register.html, the page for enrolling in courses.
+     * @return path to register.html
+     */
     @GetMapping
     public String showRegistrationForm() {
 
@@ -53,6 +65,13 @@ public class CourseRegistrationController {
 
     }
 
+    /**
+     * Persists student's courses to the database and updated the model to reflect those changes. Then
+     * returns the path to finalize.html. Probably should be two methods.
+     * @param student Student to save
+     * @param model the model
+     * @return path to finalize.html
+     */
     @PostMapping
     public String processStudentRegistration(Student student, Model model) {
 
@@ -64,7 +83,7 @@ public class CourseRegistrationController {
     }
 
     /**
-     * This filters out courses from a course list that an arbitrary student already has in their course list
+     * This filters out courses from a course list that an arbitrary student already has in their course list.
      *
      * @param allCourses     list of all available courses
      * @param studentCourses list of courses that a student has enrolled in already

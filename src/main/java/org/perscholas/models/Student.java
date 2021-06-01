@@ -15,6 +15,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a student at a school.
+ */
 @Data
 @NoArgsConstructor
 @Entity
