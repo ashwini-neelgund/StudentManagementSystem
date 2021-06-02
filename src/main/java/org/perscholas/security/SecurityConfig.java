@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public DaoAuthenticationProvider daoAuthenticationProvider() {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     provider.setUserDetailsService(appUserDetailsService);
-    provider.setPasswordEncoder(new BCryptPasswordEncoder(4));
+    provider.setPasswordEncoder(encoder());
     return provider;
   }
 
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .disable()
         .authorizeRequests()
         .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-        .antMatchers("/new-student").permitAll()
+            .antMatchers("/new-student").permitAll()
         .anyRequest()
         .authenticated()
         .and()

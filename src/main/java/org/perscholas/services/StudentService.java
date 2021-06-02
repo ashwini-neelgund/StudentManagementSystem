@@ -7,10 +7,11 @@ import org.perscholas.models.AuthGroup;
 import org.perscholas.models.Course;
 import org.perscholas.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,13 +20,18 @@ public class StudentService {
   private final StudentRepository studentRepo;
   private final CourseRepository courseRepo;
   private final AuthGroupRepository authRepo;
+  private final PasswordEncoder encoder;
 
   @Autowired
   public StudentService(
-      StudentRepository studentRepo, CourseRepository courseRepo, AuthGroupRepository authRepo) {
+      StudentRepository studentRepo,
+      CourseRepository courseRepo,
+      AuthGroupRepository authRepo,
+      PasswordEncoder encoder) {
     this.studentRepo = studentRepo;
     this.courseRepo = courseRepo;
     this.authRepo = authRepo;
+    this.encoder = encoder;
   }
 
   public Iterable<Student> getAllStudents() {
@@ -62,12 +68,18 @@ public class StudentService {
   }
 
   public void addStudent(Student student) {
-    student.setStudentPwd(new BCryptPasswordEncoder(4).encode(student.getStudentPwd()));
+    student.setStudentPwd(encoder.encode(student.getStudentPwd()));
     studentRepo.save(student);
     authRepo.save(new AuthGroup(student.getStudentEmail(), "ROLE_STUDENT"));
   }
 
-  public void updateStudent(Student student) {
-    studentRepo.save(student);
+  public Student updateStudent(Student student) {
+    Student dbStudent = studentRepo.getById(student.getStudentId());
+    List<Course> addedCourses = student.getStudentCourses();
+    List<Course> currentCourses = dbStudent.getStudentCourses();
+    currentCourses.addAll(addedCourses);
+    dbStudent.setStudentCourses(currentCourses);
+    studentRepo.save(dbStudent);
+    return dbStudent;
   }
 }
