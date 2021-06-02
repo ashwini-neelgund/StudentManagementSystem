@@ -35,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="course : ${student.getStudentCourses()}">
+            <tr th:each="course : ${currentCourses}">
                 <th scope="row" th:text="${course.courseId}">ID</th>
                 <td th:text="${course.courseName}">NAME</td>
                 <td th:text="${course.courseInstructor}"></td>

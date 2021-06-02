@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes("student")
+@SessionAttributes({"student", "currentCourses"})
 public class AdminController {
   private final CourseService courseService;
   private final StudentService studentService;
