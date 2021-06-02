@@ -5,9 +5,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,14 +12,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class Student implements Serializable, UserDetails {
+public class Student implements Serializable {
   static final long serialVersionUID = 6381462249347345007L;
 
   @Fetch(FetchMode.JOIN)
@@ -77,40 +72,5 @@ public class Student implements Serializable, UserDetails {
         + studentEmail
         + '\''
         + '}';
-  }
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-  }
-
-  @Override
-  public String getPassword() {
-    return studentPwd;
-  }
-
-  @Override
-  public String getUsername() {
-    return studentEmail;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
   }
 }

@@ -1,6 +1,7 @@
 package org.perscholas.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.perscholas.dao.AuthGroupRepository;
 import org.perscholas.models.Student;
 import org.perscholas.services.StudentService;
 import org.springframework.stereotype.Controller;

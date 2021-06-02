@@ -1,10 +1,14 @@
 package org.perscholas.services;
 
+import org.perscholas.dao.AuthGroupRepository;
 import org.perscholas.dao.CourseRepository;
 import org.perscholas.dao.StudentRepository;
+import org.perscholas.models.AuthGroup;
 import org.perscholas.models.Course;
 import org.perscholas.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +19,14 @@ import java.util.List;
 public class StudentService {
   private final StudentRepository studentRepo;
   private final CourseRepository courseRepo;
+  private final AuthGroupRepository authRepo;
 
   @Autowired
-  public StudentService(StudentRepository studentRepo, CourseRepository courseRepo) {
+  public StudentService(
+      StudentRepository studentRepo, CourseRepository courseRepo, AuthGroupRepository authRepo) {
     this.studentRepo = studentRepo;
     this.courseRepo = courseRepo;
+    this.authRepo = authRepo;
   }
 
   public Iterable<Student> getAllStudents() {
@@ -56,7 +63,9 @@ public class StudentService {
   }
 
   public void addStudent(Student student) {
+    student.setStudentPwd(new BCryptPasswordEncoder(4).encode(student.getStudentPwd()));
     studentRepo.save(student);
+    authRepo.save(new AuthGroup(student.getStudentEmail(), "ROLE_STUDENT"));
   }
 
   public Student saveStudent(Student student) {
