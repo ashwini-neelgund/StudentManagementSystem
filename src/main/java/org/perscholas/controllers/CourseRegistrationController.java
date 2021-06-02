@@ -46,7 +46,7 @@ public class CourseRegistrationController {
 
   @PostMapping
   public String processStudentRegistration(Student student, Model model) {
-    studentService.saveStudent(student);
+    studentService.updateStudent(student);
     model.addAttribute("currentCourses", student.getStudentCourses());
     model.addAttribute(
         "courses",

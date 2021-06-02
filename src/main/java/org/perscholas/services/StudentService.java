@@ -8,7 +8,6 @@ import org.perscholas.models.Course;
 import org.perscholas.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +67,7 @@ public class StudentService {
     authRepo.save(new AuthGroup(student.getStudentEmail(), "ROLE_STUDENT"));
   }
 
-  public Student saveStudent(Student student) {
-    return studentRepo.save(student);
+  public void updateStudent(Student student) {
+    studentRepo.save(student);
   }
 }
