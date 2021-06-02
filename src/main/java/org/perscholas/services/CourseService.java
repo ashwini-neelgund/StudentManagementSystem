@@ -1,6 +1,5 @@
 package org.perscholas.services;
 
-
 import org.perscholas.dao.ICourseRepo;
 import org.perscholas.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,27 +12,25 @@ import java.util.List;
 @Transactional
 public class CourseService {
 
-    /*
-           - add class annotations
-           - add @Transactional on class or on each method
-           - add crud methods
-    */
-    private ICourseRepo courseRepo;
+  /*
+         - add class annotations
+         - add @Transactional on class or on each method
+         - add crud methods
+  */
+  private final ICourseRepo courseRepo;
 
-    @Autowired
-    public CourseService(ICourseRepo courseRepo) {
-        this.courseRepo = courseRepo;
-    }
+  @Autowired
+  public CourseService(ICourseRepo courseRepo) {
+    this.courseRepo = courseRepo;
+  }
 
-    public List<Course> getAllCourses() {
+  public List<Course> getAllCourses() {
 
-        return courseRepo.findAll();
+    return courseRepo.findAll();
+  }
 
-    }
+  public Course getCourseById(Long id) {
 
-    public Course getCourseById(Long id) {
-
-        return courseRepo.getById(id);
-
-    }
+    return courseRepo.getById(id);
+  }
 }

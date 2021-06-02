@@ -1,14 +1,15 @@
 <!-- This page shows a form for a new student to input their signup information. -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
 <body>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">Student Management System</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,37 +39,37 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4 p-5">
-            <form method="post" th:object="${student}" novalidate>
+            <form method="post" novalidate th:object="${student}">
                 <h3 class="fw-bold p3">New Student Registration</h3>
                 <div class="mb-3">
-                    <label for="username" class="form-label fw-bold fst-italic">Name: </label>
-                    <input type="text" id="username" th:field="*{studentName}"
-                           th:class="${#fields.hasErrors('studentName')}?'is-invalid form-control':'form-control'"
-                           required>
+                    <label class="form-label fw-bold fst-italic" for="username">Name: </label>
+                    <input id="username" required th:class="${#fields.hasErrors('studentName')}?'is-invalid form-control':'form-control'"
+                           th:field="*{studentName}"
+                           type="text">
                     <div class="invalid-feedback">
                         <p class="error" th:each="error : ${#fields.errors('studentName')}"
                            th:text="${error}"></p>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label fw-bold fst-italic">Email : </label>
-                    <input type="text" id="email" th:field="*{studentEmail}" required
-                           th:class="${#fields.hasErrors('studentEmail')}?'is-invalid form-control':'form-control' ">
+                    <label class="form-label fw-bold fst-italic" for="email">Email : </label>
+                    <input id="email" required th:class="${#fields.hasErrors('studentEmail')}?'is-invalid form-control':'form-control' " th:field="*{studentEmail}"
+                           type="text">
                     <div class="invalid-feedback">
                         <p class="error" th:each="error : ${#fields.errors('studentEmail')}" th:text="${error}"></p>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label fw-bold fst-italic">Password : </label>
-                    <input type="password" id="password" th:field="*{studentPwd}" required
-                           th:class="${#fields.hasErrors('studentPwd')}?'is-invalid form-control':'form-control' ">
+                    <label class="form-label fw-bold fst-italic" for="password">Password : </label>
+                    <input id="password" required th:class="${#fields.hasErrors('studentPwd')}?'is-invalid form-control':'form-control' " th:field="*{studentPwd}"
+                           type="password">
                     <div class="invalid-feedback">
                         <p class="error" th:each="error : ${#fields.errors('studentPwd')}"
                            th:text="${error}"></p>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <input type="submit" value="Submit" class="btn btn-secondary"/>
+                    <input class="btn btn-secondary" type="submit" value="Submit"/>
                 </div>
             </form>
         </div>

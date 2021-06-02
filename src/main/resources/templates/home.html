@@ -8,7 +8,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">Student Management System</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,7 +38,7 @@
 <div class="container">
     <h1>Student Management System</h1>
     <span th:text="${error}"></span>
-    <form action="/login" method="post">
+    <form method="post" th:action="@{/login}">
         <div class="mb-3">
             <label class="form-label" for="email">Email address</label>
             <input class="form-control" id="email" name="email" type="email">

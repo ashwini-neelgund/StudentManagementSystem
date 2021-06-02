@@ -14,61 +14,58 @@ import java.util.List;
 @Transactional
 public class StudentService {
 
-    private final IStudentRepo studentRepo;
-    private final ICourseRepo courseRepo;
+  private final IStudentRepo studentRepo;
+  private final ICourseRepo courseRepo;
 
-    @Autowired
-    public StudentService(IStudentRepo studentRepo, ICourseRepo courseRepo) {
-        this.studentRepo = studentRepo;
-        this.courseRepo = courseRepo;
+  @Autowired
+  public StudentService(IStudentRepo studentRepo, ICourseRepo courseRepo) {
+    this.studentRepo = studentRepo;
+    this.courseRepo = courseRepo;
+  }
+
+  public Iterable<Student> getAllStudents() {
+    return studentRepo.findAll();
+  }
+
+  public Student getStudentByEmail(String email) {
+    return studentRepo.findByStudentEmail(email);
+  }
+
+  public boolean checkIfStudentExists(String studentName, String studentEmail) {
+    return studentRepo.existsByStudentNameAndStudentEmail(studentName, studentEmail);
+  }
+
+  public boolean isValid(String email, String password) {
+    return studentRepo.existsByStudentEmailAndStudentPwd(email, password);
+  }
+
+  public boolean registerStudentToCourse(Long studentId, Long courseId) {
+
+    Student student = studentRepo.getById(studentId);
+    List<Course> courses = student.getStudentCourses();
+    Course course = courseRepo.getById(courseId);
+
+    if (courses.contains(course)) {
+      return false;
     }
 
-    public Iterable<Student> getAllStudents() {
-        return studentRepo.findAll();
-    }
+    courses.add(course);
+    student.setStudentCourses(courses);
+    studentRepo.save(student);
+    return true;
+  }
 
-    public Student getStudentByEmail(String email) {
-        return studentRepo.findByStudentEmail(email);
-    }
+  public List<Course> getStudentCourses(Long studentId) {
 
-    public boolean checkIfStudentExists(String studentName, String studentEmail) {
-        return studentRepo.existsByStudentNameAndStudentEmail(studentName, studentEmail);
-    }
+    return studentRepo.getById(studentId).getStudentCourses();
+  }
 
-    public boolean isValid(String email, String password) {
-        return studentRepo.existsByStudentEmailAndStudentPwd(email, password);
-    }
+  public void addStudent(Student student) {
+    studentRepo.save(student);
+  }
 
-    public boolean registerStudentToCourse(Long studentId, Long courseId) {
+  public Student saveStudent(Student student) {
 
-        Student student = studentRepo.getById(studentId);
-        List<Course> courses = student.getStudentCourses();
-        Course course = courseRepo.getById(courseId);
-
-        if (courses.contains(course)) {
-            return false;
-        }
-
-        courses.add(course);
-        student.setStudentCourses(courses);
-        studentRepo.save(student);
-        return true;
-    }
-
-    public List<Course> getStudentCourses(Long studentId) {
-
-        return studentRepo.getById(studentId).getStudentCourses();
-
-    }
-
-    public void addStudent(Student student) {
-        studentRepo.save(student);
-    }
-
-    public Student saveStudent(Student student) {
-
-        return studentRepo.save(student);
-
-    }
-
+    return studentRepo.save(student);
+  }
 }

@@ -8,7 +8,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">Student Management System</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,7 +37,7 @@
 <!-- Page content-->
 <div class="container">
     <h3>Course Registration</h3>
-    <h4>Current Courses for <span th:text="${student.studentName}"></span> </h4>
+    <h4>Current Courses for <span th:text="${student.studentName}"></span></h4>
     <ul class="list-group" th:each="curCourse : ${currentCourses}">
         <li class="list-group-item list-group-item-action" th:text="${curCourse.courseName}"
             th:value="${curCourse.courseId}">
@@ -44,11 +45,11 @@
         </li>
     </ul>
     <h4>Available Courses</h4>
-    <form method="post" th:object="${student}" id="courseForm">
+    <form id="courseForm" method="post" th:object="${student}">
         <div class="form-check" th:each="course : ${courses}">
-            <label for="course" class="form-check-label" th:text="${course.courseName}">COURSE</label>
-            <input class="form-check-input" th:field="*{studentCourses}" id="course" type="checkbox"
-            th:value="${course.courseId}" />
+            <label class="form-check-label" for="course" th:text="${course.courseName}">COURSE</label>
+            <input class="form-check-input" id="course" th:field="*{studentCourses}" th:value="${course.courseId}"
+                   type="checkbox"/>
         </div>
         <button>Register Courses</button>
     </form>
