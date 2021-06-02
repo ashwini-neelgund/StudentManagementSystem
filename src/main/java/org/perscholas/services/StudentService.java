@@ -1,7 +1,7 @@
 package org.perscholas.services;
 
-import org.perscholas.dao.ICourseRepo;
-import org.perscholas.dao.IStudentRepo;
+import org.perscholas.dao.CourseRepository;
+import org.perscholas.dao.StudentRepository;
 import org.perscholas.models.Course;
 import org.perscholas.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,11 @@ import java.util.List;
 @Service
 @Transactional
 public class StudentService {
-
-  private final IStudentRepo studentRepo;
-  private final ICourseRepo courseRepo;
+  private final StudentRepository studentRepo;
+  private final CourseRepository courseRepo;
 
   @Autowired
-  public StudentService(IStudentRepo studentRepo, ICourseRepo courseRepo) {
+  public StudentService(StudentRepository studentRepo, CourseRepository courseRepo) {
     this.studentRepo = studentRepo;
     this.courseRepo = courseRepo;
   }
@@ -40,15 +39,12 @@ public class StudentService {
   }
 
   public boolean registerStudentToCourse(Long studentId, Long courseId) {
-
     Student student = studentRepo.getById(studentId);
     List<Course> courses = student.getStudentCourses();
     Course course = courseRepo.getById(courseId);
-
     if (courses.contains(course)) {
       return false;
     }
-
     courses.add(course);
     student.setStudentCourses(courses);
     studentRepo.save(student);
@@ -56,7 +52,6 @@ public class StudentService {
   }
 
   public List<Course> getStudentCourses(Long studentId) {
-
     return studentRepo.getById(studentId).getStudentCourses();
   }
 
@@ -65,7 +60,6 @@ public class StudentService {
   }
 
   public Student saveStudent(Student student) {
-
     return studentRepo.save(student);
   }
 }

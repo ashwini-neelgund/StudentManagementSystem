@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IAuthGroup extends JpaRepository<AuthGroup, Long> {
-
+public interface AuthGroupRepository extends JpaRepository<AuthGroup, Long> {
   List<AuthGroup> findByAuthUsername(String username);
 }

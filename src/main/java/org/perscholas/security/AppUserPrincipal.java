@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 public class AppUserPrincipal implements UserDetails {
-
-  // fields
   private final Student student;
   private final List<AuthGroup> authGroups;
 
@@ -21,19 +19,14 @@ public class AppUserPrincipal implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-
     if (null == authGroups) {
       return Collections.emptySet();
     }
-
-    // init
     Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
-
     authGroups.forEach(
         authGroup -> {
           grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
         });
-
     return grantedAuthorities;
   }
 

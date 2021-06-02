@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
@@ -13,13 +14,13 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+@Slf4j
 @Entity
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Component
 public class AuthGroup implements Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Id

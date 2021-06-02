@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,15 +15,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-/** Represents a student at a school. */
 @Data
 @NoArgsConstructor
 @Entity
-@Component
-public class Student implements Serializable {
-
+public class Student implements Serializable, UserDetails {
   static final long serialVersionUID = 6381462249347345007L;
 
   @Fetch(FetchMode.JOIN)
@@ -50,20 +51,13 @@ public class Student implements Serializable {
   private String studentEmail;
 
   public Student(String name, String email, String password) {
-
     studentName = name;
     studentEmail = email;
     studentPwd = password;
     studentCourses = new ArrayList<>();
   }
 
-  /**
-   * Adds a course to a student's course list.
-   *
-   * @param course the course to add
-   */
   public void addCourse(Course course) {
-
     this.studentCourses.add(course);
   }
 
@@ -83,5 +77,40 @@ public class Student implements Serializable {
         + studentEmail
         + '\''
         + '}';
+  }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+  }
+
+  @Override
+  public String getPassword() {
+    return studentPwd;
+  }
+
+  @Override
+  public String getUsername() {
+    return studentEmail;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
   }
 }

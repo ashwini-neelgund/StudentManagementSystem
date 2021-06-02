@@ -1,5 +1,6 @@
 package org.perscholas.dao;
 
+import org.perscholas.models.AuthGroup;
 import org.perscholas.models.Course;
 import org.perscholas.models.Student;
 import org.springframework.boot.CommandLineRunner;
@@ -7,14 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/** This class pre-loads the database with some students and courses on application start-up. */
 @Configuration
 public class DaoConfig {
-
   @Bean
   public CommandLineRunner dataLoader(
-      ICourseRepo courseRepo, IStudentRepo studentRepo, PasswordEncoder encoder) {
-
+      CourseRepository courseRepo,
+      StudentRepository studentRepo,
+      AuthGroupRepository authRepo,
+      PasswordEncoder encoder) {
     return args -> {
       courseRepo.save(new Course("Intro to CS", "Donnie Wahlberg"));
       courseRepo.save(new Course("Data Structures and Algorithms", "Mark Wahlberg"));
@@ -38,6 +39,7 @@ public class DaoConfig {
       studentRepo.save(
           new Student("Vanessa Vance", "vancinator@gamil.com", encoder.encode("Paaaaasword1")));
       studentRepo.save(new Student("Carol Kaye", "kayec@gmail.com", encoder.encode("BeachBoys22")));
+      authRepo.save(new AuthGroup("dave@email.com", "ROLE_ADMIN"));
     };
   }
 }

@@ -43,7 +43,8 @@
                 <h3 class="fw-bold p3">New Student Registration</h3>
                 <div class="mb-3">
                     <label class="form-label fw-bold fst-italic" for="username">Name: </label>
-                    <input id="username" required th:class="${#fields.hasErrors('studentName')}?'is-invalid form-control':'form-control'"
+                    <input id="username" required
+                           th:class="${#fields.hasErrors('studentName')}?'is-invalid form-control':'form-control'"
                            th:field="*{studentName}"
                            type="text">
                     <div class="invalid-feedback">
@@ -53,7 +54,9 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold fst-italic" for="email">Email : </label>
-                    <input id="email" required th:class="${#fields.hasErrors('studentEmail')}?'is-invalid form-control':'form-control' " th:field="*{studentEmail}"
+                    <input id="email" required
+                           th:class="${#fields.hasErrors('studentEmail')}?'is-invalid form-control':'form-control' "
+                           th:field="*{studentEmail}"
                            type="text">
                     <div class="invalid-feedback">
                         <p class="error" th:each="error : ${#fields.errors('studentEmail')}" th:text="${error}"></p>
@@ -61,7 +64,9 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold fst-italic" for="password">Password : </label>
-                    <input id="password" required th:class="${#fields.hasErrors('studentPwd')}?'is-invalid form-control':'form-control' " th:field="*{studentPwd}"
+                    <input id="password" required
+                           th:class="${#fields.hasErrors('studentPwd')}?'is-invalid form-control':'form-control' "
+                           th:field="*{studentPwd}"
                            type="password">
                     <div class="invalid-feedback">
                         <p class="error" th:each="error : ${#fields.errors('studentPwd')}"
