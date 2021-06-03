@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("student")
 public class HomeController {
 
-  @GetMapping("/403")
-  public String accessDenied() { return "403"; }
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "403";
+    }
 }

@@ -9,54 +9,55 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 public class AppUserPrincipal implements UserDetails {
-  private final Student student;
-  private final List<AuthGroup> authGroups;
+    private final Student student;
+    private final List<AuthGroup> authGroups;
 
-  public AppUserPrincipal(Student student, List<AuthGroup> authGroups) {
-    this.student = student;
-    this.authGroups = authGroups;
-  }
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    if (null == authGroups) {
-      return Collections.emptySet();
+    public AppUserPrincipal(Student student, List<AuthGroup> authGroups) {
+        this.student = student;
+        this.authGroups = authGroups;
     }
-    Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
-    authGroups.forEach(
-        authGroup -> {
-          grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
-        });
-    return grantedAuthorities;
-  }
 
-  @Override
-  public String getPassword() {
-    return this.student.getStudentPwd();
-  }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (null == authGroups) {
+            return Collections.emptySet();
+        }
 
-  @Override
-  public String getUsername() {
-    return this.student.getStudentEmail();
-  }
+        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
+        authGroups.forEach(
+                authGroup -> {
+                    grantedAuthorities.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
+                });
+        return grantedAuthorities;
+    }
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+    @Override
+    public String getPassword() {
+        return this.student.getStudentPwd();
+    }
 
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+    @Override
+    public String getUsername() {
+        return this.student.getStudentEmail();
+    }
 
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

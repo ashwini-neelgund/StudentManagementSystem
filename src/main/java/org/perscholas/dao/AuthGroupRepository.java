@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AuthGroupRepository extends JpaRepository<AuthGroup, Long> {
-  List<AuthGroup> findByAuthUsername(String username);
+    List<AuthGroup> findByAuthUsername(String username);
 }

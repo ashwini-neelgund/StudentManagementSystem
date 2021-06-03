@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CourseController {
   @GetMapping("/current")
   public String currentCourses(Model model) {
+
     // temp. hardcode
     return "courses";
   }

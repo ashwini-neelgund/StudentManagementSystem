@@ -15,38 +15,41 @@ import java.util.List;
 @RequestMapping("/admin")
 @SessionAttributes({"student", "currentCourses"})
 public class AdminController {
-  private final CourseService courseService;
-  private final StudentService studentService;
+    private final CourseService courseService;
+    private final StudentService studentService;
 
-  @Autowired
-  public AdminController(CourseService courseService, StudentService studentService) {
-    this.courseService = courseService;
-    this.studentService = studentService;
-  }
+    @Autowired
+    public AdminController(CourseService courseService, StudentService studentService) {
+        this.courseService = courseService;
+        this.studentService = studentService;
+    }
 
-  @GetMapping("all-courses")
-  public String showCourses(Model model) {
-    List<Course> courses = courseService.getAllCourses();
-    model.addAttribute("courses", courses);
-    return "all-courses";
-  }
+    @GetMapping("all-courses")
+    public String showCourses(Model model) {
+        List<Course> courses = courseService.getAllCourses();
+        model.addAttribute("courses", courses);
 
-  @GetMapping("all-students")
-  public String showStudents(Model model) {
-    Iterable<Student> students = studentService.getAllStudents();
-    model.addAttribute("students", students);
-    return "all-students";
-  }
+        return "all-courses";
+    }
 
-  @GetMapping("student-info")
-  public String getStudent() {
-    return "student-info";
-  }
+    @GetMapping("all-students")
+    public String showStudents(Model model) {
+        Iterable<Student> students = studentService.getAllStudents();
+        model.addAttribute("students", students);
 
-  @PostMapping("/lookup")
-  public String displayInfo(@ModelAttribute("email") String email, Model model) {
-    Student student = studentService.getStudentByEmail(email);
-    model.addAttribute("student", student);
-    return "student-info";
-  }
+        return "all-students";
+    }
+
+    @GetMapping("student-info")
+    public String getStudent() {
+        return "student-info";
+    }
+
+    @PostMapping("/lookup")
+    public String displayInfo(@ModelAttribute("email") String email, Model model) {
+        Student student = studentService.getStudentByEmail(email);
+        model.addAttribute("student", student);
+
+        return "student-info";
+    }
 }

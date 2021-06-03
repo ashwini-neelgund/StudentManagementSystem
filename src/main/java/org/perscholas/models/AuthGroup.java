@@ -21,13 +21,13 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @Component
 public class AuthGroup implements Serializable {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long authId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long authId;
 
-  @NonNull @NotBlank String authUsername;
+    @NonNull @NotBlank String authUsername;
 
-  @NonNull @NotBlank String authGroup;
+    @NonNull @NotBlank String authGroup;
 }

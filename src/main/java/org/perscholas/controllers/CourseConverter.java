@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CourseConverter implements Converter<String, Course> {
-
   private final CourseRepository repo;
 
   public CourseConverter(CourseRepository repo) {

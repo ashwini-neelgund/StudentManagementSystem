@@ -16,22 +16,24 @@ import java.util.List;
 @Slf4j
 @Service
 public class AppUserDetailsService implements UserDetailsService {
-  private final StudentRepository studentRepo;
-  private final AuthGroupRepository authGroupRepo;
+    private final StudentRepository studentRepo;
+    private final AuthGroupRepository authGroupRepo;
 
-  @Autowired
-  public AppUserDetailsService(StudentRepository studentRepo, AuthGroupRepository authGroupRepo) {
-    this.studentRepo = studentRepo;
-    this.authGroupRepo = authGroupRepo;
-  }
-
-  @Override
-  public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-    Student student = studentRepo.findByStudentEmail(s);
-    if (student == null) {
-      throw new UsernameNotFoundException("User '" + s + "' not found.");
+    @Autowired
+    public AppUserDetailsService(StudentRepository studentRepo, AuthGroupRepository authGroupRepo) {
+        this.studentRepo = studentRepo;
+        this.authGroupRepo = authGroupRepo;
     }
-    List<AuthGroup> authGroups = authGroupRepo.findByAuthUsername(s);
-    return new AppUserPrincipal(student, authGroups);
-  }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        Student student = studentRepo.findByStudentEmail(s);
+
+        if (student == null) {
+            throw new UsernameNotFoundException("User '" + s + "' not found.");
+        }
+
+        List<AuthGroup> authGroups = authGroupRepo.findByAuthUsername(s);
+        return new AppUserPrincipal(student, authGroups);
+    }
 }

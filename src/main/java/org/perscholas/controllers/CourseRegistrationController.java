@@ -18,44 +18,45 @@ import java.util.stream.Collectors;
 @RequestMapping("/register")
 @SessionAttributes({"student", "currentCourses"})
 public class CourseRegistrationController {
+    private final CourseService courseService;
+    private final StudentService studentService;
 
-  private final CourseService courseService;
-  private final StudentService studentService;
-
-  @Autowired
-  public CourseRegistrationController(CourseService courseService, StudentService studentService) {
-    this.courseService = courseService;
-    this.studentService = studentService;
-  }
-
-  @ModelAttribute
-  public void addCoursesToModel(Model model) {
-    List<Course> courses = courseService.getAllCourses();
-    model.addAttribute("courses", courses);
-  }
-
-  @GetMapping
-  public String showRegistrationForm() {
-    return "register";
-  }
-
-  @PostMapping
-  public String processStudentRegistration(Student student, Model model) {
-    Student updatedStudent = studentService.updateStudent(student);
-    model.addAttribute("currentCourses", updatedStudent.getStudentCourses());
-    model.addAttribute(
-        "courses",
-        filterEnrolledCourses(courseService.getAllCourses(), student.getStudentCourses()));
-    return "finalize";
-  }
-
-  private Iterable<Course> filterEnrolledCourses(
-      List<Course> allCourses, List<Course> studentCourses) {
-    if (studentCourses == null || studentCourses.size() == 0) {
-      return allCourses;
+    @Autowired
+    public CourseRegistrationController(CourseService courseService, StudentService studentService) {
+        this.courseService = courseService;
+        this.studentService = studentService;
     }
-    return allCourses.stream()
-        .filter(course -> !studentCourses.contains(course))
-        .collect(Collectors.toList());
-  }
+
+    @ModelAttribute
+    public void addCoursesToModel(Model model) {
+        List<Course> courses = courseService.getAllCourses();
+        model.addAttribute("courses", courses);
+    }
+
+    @GetMapping
+    public String showRegistrationForm() {
+        return "register";
+    }
+
+    @PostMapping
+    public String processStudentRegistration(Student student, Model model) {
+        Student updatedStudent = studentService.updateStudent(student);
+        model.addAttribute("currentCourses", updatedStudent.getStudentCourses());
+        model.addAttribute(
+                "courses",
+                filterEnrolledCourses(courseService.getAllCourses(), student.getStudentCourses()));
+
+        return "finalize";
+    }
+
+    private Iterable<Course> filterEnrolledCourses(
+            List<Course> allCourses, List<Course> studentCourses) {
+        if (studentCourses == null || studentCourses.size() == 0) {
+            return allCourses;
+        }
+
+        return allCourses.stream()
+                .filter(course -> !studentCourses.contains(course))
+                .collect(Collectors.toList());
+    }
 }

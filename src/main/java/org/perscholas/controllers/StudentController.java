@@ -10,20 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("student")
 public class StudentController {
-  private final StudentService studentService;
+    private final StudentService studentService;
 
-  public StudentController(StudentService studentService) {
-    this.studentService = studentService;
-  }
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
-  @GetMapping("/register")
-  public String showRegisterStudentForm(Model model) {
-    model.addAttribute("student", new Student());
-    return "new-student";
-  }
+    @GetMapping("/register")
+    public String showRegisterStudentForm(Model model) {
+        model.addAttribute("student", new Student());
 
-  @GetMapping("/homepage")
-  public String showHomepage() {
-    return "home";
-  }
+        return "new-student";
+    }
+
+    @GetMapping("/homepage")
+    public String showHomepage() {
+        return "home";
+    }
 }
